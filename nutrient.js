@@ -28,18 +28,21 @@ function nutritionCallFromServer(){
        "query": 'apple',
    };
    let options = {
-       dataType: 'json',
-       url: 'https://trackapi.nutritionix.com/v2/natural/nutrients',
+       dataType: "json",
+       url: "https://trackapi.nutritionix.com/v2/natural/nutrients",
        headers: dataForServer,
        data: {
-           'query': userQuery
+           "query": userQuery
        },
-       method: 'post',
+       method: "post",
        success: function(response) {
            let src = response.foods[0].photo.highres;
-           let img = $('<img>').attr('src', src);
-           
-           $('#pic').html(img);
+           if(!src){
+                src = "img/noimage.png";
+           }
+           let img = $("<img>").attr("src", src).css("width", "55%");
+       
+           $("#pic").html(img);
            storeNutritionToDOM(response.foods[0])
        },
        error: function(error){
