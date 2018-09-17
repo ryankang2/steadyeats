@@ -1,0 +1,32 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: white;
+}
+
+#logo {
+    margin-top: 5%;
+}
+
+#logoImage {
+    position: relative;
+    margin: auto;
+    transform: rotate(-15deg)
+}
+
+#nameImage{
+    height: 120px;
+}
+
+.formSection {
+    width: 50%;
+    margin: auto;
+    position: relative;
+}
+
+#loadingText {
+    font-size: 1.6em;
+    font-family: 'Courier New', Courier, monospace;
+}

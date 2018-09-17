@@ -1,0 +1,201 @@
+* {
+  box-sizing: border-box;
+}
+
+table{
+    background-color: green;
+    width: 50px;
+}
+
+#right-panel {
+   font-family: 'Roboto','sans-serif';
+   line-height: 30px;
+   padding-left: 10px;
+}
+
+#right-panel select, #right-panel input {
+   font-size: 15px;
+}
+
+#right-panel select {
+   width: 100%;
+}
+
+#right-panel i {
+   font-size: 12px;
+}
+
+#right-panel {
+   float: right;
+   width: 34%;
+   height: 100%;
+}
+
+.orange{
+  position: relative
+}
+
+#foodName {
+  font-size: 2.5em
+}
+
+#logo {
+  display: inline-block;
+  width: 5%;
+}
+
+#logo:hover{
+  cursor: pointer;
+}
+
+
+#nameTitle{
+    display: inline;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgb(5, 129, 5);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.foodName {
+  font-size: 3em;
+}
+
+#mapAndPic {
+  width: 100%;
+  margin-top: 1%;
+}
+
+#pic img{
+  width: 90%;
+}
+
+.nutritionTitles {
+  display: inline-block;
+  width: 70%
+}
+
+.nutrition {
+  margin-top: 5%;
+}
+
+.nutritionTitles {
+  display: inline-block;
+  width: 100%;
+}
+
+#map{
+  height: 80vh;
+  display: none;
+}
+
+#findMore {
+  display: inline-block;
+  background-color: rgb(13, 179, 13);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 3px #999;
+}
+
+#findMore:hover {
+  background-color: rgb(62, 197, 29);
+}
+
+#findMore:active, #reset:active, #goThere:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(3px);
+}
+
+#reset {
+  background-color: red;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 3px #999;
+}
+
+#goThere {
+  background-color: green;
+  border-radius: 10px;
+  box-shadow: 0 3px #999;
+}
+
+#goThere:hover {
+  background-color: rgb(1, 102, 1);
+}
+
+#reset:hover {
+  background-color: rgb(190, 28, 16);
+}
+
+#findMore:hover {
+  background-color: darkgreen;
+}
+
+.nutritionTitles .right-align {
+  float: right;
+}
+
+.nutrition > div {
+  border: 2px solid black;
+}
+
+.nutrition > div:nth-child(1) {
+  font-weight: bold;
+}
+
+.nutritionTitles > div {
+  border: 1px solid black;
+}
+
+.yelp {
+  width: 90%;
+}
+
+
+#map {
+  height: 50vh;
+}
+
+#yelpImage {
+  height:100%;
+  width: 100%;
+  font-size:0;
+}
+
+.yelp > div {
+  border: 2px solid black;
+  margin-top: 10%;
+}
+
+.yelpTitle {
+  font-weight: bold;
+  border: 1.2px solid black;
+  position: relative;
+  bottom:0.75vw;
+}
+
+.yelpTitle, .yelpInfo {
+  padding-left: 2%;
+  padding-bottom: 3%;
+}
+
+.modal {
+  top: 10%;
+  z-index: 1;
+}
+
+.adp table {
+  width: 100%;
+}
+
+.adp-substep{
+  color: white;
+}
+
+#pac-input{
+  display: none;
+}
