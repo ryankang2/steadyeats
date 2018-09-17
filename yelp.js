@@ -11,7 +11,7 @@ let yelpResponse = null;
 function requestYelpData (name, address, city) {
     let customUrl = "https://yelp.ongandy.com/businesses/matches";
     let key = {
-        api_key: "9bPpnQ55-8I0jLR62WqbyvBAv20IJ-zF-WJs7YJgLqZeRqokQg2L995TrDHKUVXEmRblz6We2EMClsxkS4vbfmRLLP5G1cPcV5FFX0fzSi388ha6a1qsHR5J97dWW3Yx",
+        api_key: "8omc0Yh_VpsNVtwSesxDrxKYNBTjSx4unT_tUQKxv7FpvWGn9QmAhpI2XlvNHaN3NDrwdY2UahjFHb5Qu6KhuzlLFQ04LzbCJT1BocPCAAiMEJpovT3fWX4IoKtXW3Yx",
         name: name,
         address1: address,
         city: city,
@@ -31,6 +31,7 @@ function requestYelpData (name, address, city) {
             console.log("error from requestYelpData: ", error);
         }
     }
+
     $.ajax(yelpAPI)
 }
 
@@ -45,6 +46,11 @@ function getYelpDetails (id) {
         id: id,
       }
     let yelpAPI = {
+        crossDomain: true,
+        headers: {
+            "Authorization": "Basic Og==",
+            "Cache-Control": "no-cache",
+        },
         data: key,
         url: customUrl,
         method: "POST",
@@ -65,22 +71,22 @@ function createYelpDisplay(response) {
     let name = response.name;
     $(".name").text(name);
     let phone = response.display_phone;
-    $('.phone').text(phone);
+    $(".phone").text(phone);
     let price = response.price;
     let reviewCount = response.review_count;
     let rating = response.rating;
-    $('.reviews').text( ` ${price}, ${reviewCount} reviews, ${rating}/5 Stars`)
+    $(".reviews").text( ` ${price}, ${reviewCount} reviews, ${rating}/5 stars`)
     let type = response.categories[0].title;
-    $('.type').text(type);
+    $(".type").text(type);
     let displayAddress = response.location.display_address[0];
-    $('.address').text(displayAddress);
+    $(".address").text(displayAddress);
     let businessImage = response.image_url;
-    $('#yelpImage').attr('src', businessImage);
+    $("#yelpImage").attr('src', businessImage);
     let openStatus = response.hours[0].is_open_now;
     if(openStatus) {
-        $('.openOrClosed').text("OPEN").css('color','green');
+        $(".openOrClosed").text("OPEN").css("color","green");
     } else {
-        $('.openOrClosed').text("CLOSED").css('color','red');
+        $(".openOrClosed").text("CLOSED").css("color","red");
     }
     $("#goThere").addClass("scale-in");
 }

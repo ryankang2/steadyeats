@@ -37,16 +37,16 @@ function applyClickHandler(){
  * shows directions modal when user presses get me there button
  */
 function modalActivity(){
-    let modal = document.getElementById('directionModal');
-    $('#goThere').click(function(){
-        $('.modal').show();
+    let modal = document.getElementById("directionModal");
+    $("#goThere").click(function(){
+        $(".modal").show();
     });
-    $('.okBtn').click(function(){
-        $('.modal').hide();
+    $(".okBtn").click(function(){
+        $(".modal").hide();
     });
     window.onclick = function(event) {
         if (event.target == modal) {
-            $('.modal').hide();
+            $(".modal").hide();
         }
     }
 }
@@ -59,11 +59,11 @@ function modalActivity(){
  * Trigger the input equivalent to the enter button
  */
 function submitFormData () {
-    let input = document.getElementById('pac-input');
+    let input = document.getElementById("pac-input");
     try {
-        google.maps.event.trigger( input, 'focus');
+        google.maps.event.trigger( input, "focus");
     } finally {
-        google.maps.event.trigger( input, 'keydown', {keyCode:13});
+        google.maps.event.trigger( input, "keydown", {keyCode:13});
     }
 }
 
@@ -89,10 +89,10 @@ function showMap(){
  */
 
 function initAutocomplete() {
-    map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById("map"), {
         center: origin,
         zoom: 13,
-        mapTypeId: 'roadmap'
+        mapTypeId: "roadmap"
     });
 
     infoWindow = new google.maps.InfoWindow;
@@ -106,7 +106,7 @@ function initAutocomplete() {
             };
 
             infoWindow.setPosition(pos);
-            infoWindow.setContent('You are Here');
+            infoWindow.setContent("You are Here");
             infoWindow.open(map);
             map.setCenter(pos);
             previousInfoWindow = infoWindow;
@@ -114,18 +114,18 @@ function initAutocomplete() {
             handleLocationError(true, infoWindow, map.getCenter());
         });
     } else {
-        // Browser doesn't support Geolocation
+        // Browser doesn"t support Geolocation
         handleLocationError(false, infoWindow, map.getCenter());
     }
 
     // Create the search box and link it to the search bar element with the id of pac-input.
-    let input = document.getElementById('pac-input');
+    let input = document.getElementById("pac-input");
     let searchBox = new google.maps.places.SearchBox(input);
 
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-    // Bias the SearchBox results towards current map's viewport.
-    map.addListener('bounds_changed', function() {
+    // Bias the SearchBox results towards current map"s viewport.
+    map.addListener("bounds_changed", function() {
         searchBox.setBounds(map.getBounds());
     });
 
@@ -133,7 +133,7 @@ function initAutocomplete() {
 
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
-    searchBox.addListener('places_changed', function() {
+    searchBox.addListener("places_changed", function() {
       let places = searchBox.getPlaces();
 
         if (places.length == 0) {
@@ -152,24 +152,24 @@ function initAutocomplete() {
             }
 
             let infoWindow = new google.maps.InfoWindow({
-                content: `${place.name} <br> Rating: ${place.rating} `,
+                content: `${place.name}`,
                 pixelOffset: new google.maps.Size(0, 0)
             });
            
 
             let markerLocation = new google.maps.Marker({
                 map: map,
-                icon: 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png',
+                icon: "http://maps.google.com/mapfiles/ms/icons/orange-dot.png",
                 title: place.name,
                 position: place.geometry.location
             });
 
-            markerLocation.addListener('click', function() {
+            markerLocation.addListener("click", function() {
                 previousInfoWindow.close();
                 infoWindow.open(map, markerLocation);
                 previousInfoWindow = infoWindow;
                 // break the address up into street address , cit
-                const arrayOfString = place.formatted_address.split(',');
+                const arrayOfString = place.formatted_address.split(",");
                 const address = arrayOfString[0];
                 const cityName = arrayOfString[1];
                 const name = place.name;
@@ -202,8 +202,8 @@ function initAutocomplete() {
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
     infoWindow.setContent(browserHasGeolocation ?
-        'Error: The Geolocation service failed.' :
-        'Error: Your browser doesn\'t support geolocation.');
+        "Error: The Geolocation service failed." :
+        "Error: Your browser doesn\"t support geolocation.");
     infoWindow.open(map);
 }
 
@@ -220,16 +220,17 @@ function displayRoute(origin, destination) {
 
         draggable: true,
         map: map,
-        panel: document.getElementById('direction')
+        panel: document.getElementById("direction")
     });
     service.route({
         origin: origin,
         destination: destination,
-        travelMode: 'DRIVING',
-        avoidTolls: true
+        travelMode: "DRIVING",
+        avoidTolls: true,
+        unitSystem: google.maps.UnitSystem.IMPERIAL,
     }, function(response, status) {
       
-        if (status === 'OK') {
+        if (status === "OK") {
             if (previousRoute){
                 //here we set previous route to null so it clears the previous route
                 previousRoute.setMap(null);
@@ -238,7 +239,7 @@ function displayRoute(origin, destination) {
             previousRoute = display;
             display.setDirections(response);
         } else {
-            alert('Could not display directions due to: ' + status);
+            alert("Could not display directions due to: " + status);
         }
     });
 }
@@ -255,7 +256,7 @@ function computeTotalDistance(result) {
     }
     total = total / 1000;
     // it displays in km, in future we will converting to miles
-    document.getElementById('total').innerHTML = total + ' km';
+    document.getElementById("total").innerHTML = total + " km";
 }
 
 
