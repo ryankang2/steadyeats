@@ -40,7 +40,7 @@ function nutritionCallFromServer(){
            if(!src){
                 src = "img/noimage.png";
            }
-           let img = $("<img>").attr("src", src).css("width", "55%");
+           let img = $("<img>").attr("src", src);
        
            $("#pic").html(img);
            storeNutritionToDOM(response.foods[0])
