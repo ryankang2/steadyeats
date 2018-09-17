@@ -61,6 +61,8 @@ table{
 
 .foodName {
   font-size: 3em;
+  text-align: center;
+
 }
 
 #mapAndPic {
@@ -69,7 +71,9 @@ table{
 }
 
 #pic img{
-  width: 90%;
+  width: 55%;
+  display: block;
+  margin: 0 auto;
 }
 
 .nutritionTitles {
@@ -197,4 +201,17 @@ table{
 
 #pac-input{
   display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .row .col.offset-s1{
+    margin-left: -0.666667%;
+    width: 100%;
+  }
+  .row .col.s7{
+    width: 100%;
+    margin-left: auto;
+    left: auto;
+    right: auto; 
+  }
 }
