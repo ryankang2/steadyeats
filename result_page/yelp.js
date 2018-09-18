@@ -76,12 +76,14 @@ function createYelpDisplay(response) {
     let reviewCount = response.review_count;
     let rating = response.rating;
     $(".reviews").text( ` ${price}, ${reviewCount} reviews, ${rating}/5 stars`)
-    let type = response.categories[0].title;
-    $(".type").text(type);
+    // let type = response.categories[0].title;
+    // $(".type").text(type);
+    let link = response.url;
+    $(".link").text("View on Yelp").attr("href", link).attr("target", "_blank");
     let displayAddress = response.location.display_address[0];
     $(".address").text(displayAddress);
     let businessImage = response.image_url;
-    $("#yelpImage").attr('src', businessImage);
+    $("#yelpImage").attr("src", businessImage);
     let openStatus = response.hours[0].is_open_now;
     if(openStatus) {
         $(".openOrClosed").text("OPEN").css("color","green");

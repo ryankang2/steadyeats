@@ -141,6 +141,7 @@ table{
 
 .nutritionTitles .right-align {
   float: right;
+  margin-right: 1%;
 }
 
 .nutrition > div {

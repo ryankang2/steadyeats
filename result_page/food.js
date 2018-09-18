@@ -79,7 +79,7 @@ function showMap(){
   $("#pic").hide();
   $("#map").show();
   foodInput = sessionStorage.getItem("setFood");
-  $("#pac-input").val(foodInput);
+  $("#pac-input").val("places that sell" + foodInput + " near me");
   setTimeout(submitFormData, 1000);
 }
 
@@ -124,7 +124,7 @@ function initAutocomplete() {
 
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-    // Bias the SearchBox results towards current map"s viewport.
+    // Bias the SearchBox results towards current map's viewport.
     map.addListener("bounds_changed", function() {
         searchBox.setBounds(map.getBounds());
     });
@@ -265,6 +265,6 @@ function computeTotalDistance(result) {
  * back to first screen
  */
 function startOver(){ 
-    location.assign("index.html");
+    location.assign("../landing_page/index.html");
     sessionStorage("setFood", "");
 }
