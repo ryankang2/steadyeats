@@ -75,7 +75,7 @@ function submitClicked () {
  *  Changes the page  
  */
 function changePage() {
-    location.assign("food.html")
+    location.assign("../result_page/food.html")
 }
 /**
  * Will use session storage to get user
@@ -87,6 +87,7 @@ function retrieveInput () {
     return foodInput;
 }
 
+
 function nutritionCallFromServer(food){
     let dataForServer = {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -94,7 +95,6 @@ function nutritionCallFromServer(food){
          "x-app-key": "1c577a065dc2109313e314fdb410b965",
         "x-remote-user-id": "0",
         "Cache-Control": "no-cache",
-        "query": 'apple',
     };
     let options = {
         dataType: "json",

@@ -16,7 +16,7 @@ function initializeApp(){
 function displayFood(jsonResponse){
     let src = jsonResponse.foods[0].photo.highres;
     if(!src){
-        src = "img/noimage.png";
+        src = "../img/noimage.png";
     }
     let img = $("<img>").attr("src", src);
      $("#pic").html(img);
