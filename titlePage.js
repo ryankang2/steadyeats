@@ -63,16 +63,18 @@ function addClickHandler () {
  * Once user presses submit, get input and change page
  */
 function submitClicked () {
-    retrieveInput();
-    changePage();
+    let returnedFood = retrieveInput();
+    if(!returnedFood){
+        $("#error").text("Please input a food item");
+        return;
+    }
+    nutritionCallFromServer(returnedFood);
 }
 
 /**
  *  Changes the page  
  */
-function changePage () {
-    // nutritionCallFromServer($("#food").val());
-
+function changePage() {
     location.assign("food.html")
 }
 /**
@@ -81,8 +83,36 @@ function changePage () {
  */
 function retrieveInput () {
     foodInput = $("#food").val();
-    let food = sessionStorage;
-    food.setFood = foodInput;
-
-
+    sessionStorage.setFood = foodInput;
+    return foodInput;
 }
+
+function nutritionCallFromServer(food){
+    let dataForServer = {
+        "Content-Type": "application/x-www-form-urlencoded",
+         "x-app-id": "0657689d",
+         "x-app-key": "1c577a065dc2109313e314fdb410b965",
+        "x-remote-user-id": "0",
+        "Cache-Control": "no-cache",
+        "query": 'apple',
+    };
+    let options = {
+        dataType: "json",
+        url: "https://trackapi.nutritionix.com/v2/natural/nutrients",
+        headers: dataForServer,
+        data: {
+            "query": food
+        },
+        method: "post",
+        success: function(response){
+            localStorage.setItem("resp", JSON.stringify(response));
+            changePage();
+        },
+        error: function(error){
+            if (error.statusText === "Not Found") {
+                $("#error").text("Database couldn't find " + food);
+            }
+        }
+    }
+    $.ajax(options);
+ }
