@@ -30,3 +30,8 @@ body {
     font-size: 1.6em;
     font-family: 'Courier New', Courier, monospace;
 }
+
+#error{
+    float: left;
+    color: red;
+}
