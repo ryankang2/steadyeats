@@ -1,7 +1,7 @@
 $(document).ready(initializeApp);
 
 let infoWindow;
-let origin = {lat: 33.6348676, lng: -117.7405317};
+let origin = { lat: 33.6348676, lng: -117.7405317 };
 let foodName = sessionStorage.getItem("setFood").toLowerCase();
 let map;
 let previousInfoWindow = false;
@@ -11,8 +11,8 @@ let previousRoute = false;
  * apply click handlers and put food name on display
  */
 function initializeApp() {
-  applyClickHandler();
-  $("#foodName").text(foodName).css("color", "orange");
+    applyClickHandler();
+    $("#foodName").text(foodName).css("color", "orange");
 }
 
 /**
@@ -25,26 +25,53 @@ function initializeApp() {
  * @param { none };
  * @returns { none };
  */
-function applyClickHandler(){
-  $("#findMore").click(showMap);
-  $("#reset").click(startOver);
-  $("#logo").click(startOver);
-  $("#pac-input").hide();
-  modalActivity();
+function applyClickHandler() {
+    $("#findMore").click(showMap);
+    $("#reset").click(startOver);
+    $("#logo").click(startOver);
+    $(".tablinks").click(openTab);
+    $("#pac-input").hide();
+    modalActivity();
+
+
+    openTab({
+        target: {
+            innerHTML: "Nutrition",
+        },
+        currentTarget: $(".tab .tablinks:nth-child(1)")[0]
+    })
+
+
+}
+
+function openTab(event) {
+    // console.log(event.target.innerHTML);
+    let i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    $("." + (event.target.innerHTML).toLowerCase()).css("display", "block");
+    event.currentTarget.className += " active";
+
 }
 
 /**
  * shows directions modal when user presses get me there button
  */
-function modalActivity(){
+function modalActivity() {
     let modal = document.getElementById("directionModal");
-    $("#goThere").click(function(){
+    $("#goThere").click(function () {
         $(".modal").show();
     });
-    $(".okBtn").click(function(){
+    $(".okBtn").click(function () {
         $(".modal").hide();
     });
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == modal) {
             $(".modal").hide();
         }
@@ -58,12 +85,12 @@ function modalActivity(){
  * focus on 
  * Trigger the input equivalent to the enter button
  */
-function submitFormData () {
+function submitFormData() {
     let input = document.getElementById("pac-input");
     try {
-        google.maps.event.trigger( input, "focus");
+        google.maps.event.trigger(input, "focus");
     } finally {
-        google.maps.event.trigger( input, "keydown", {keyCode:13});
+        google.maps.event.trigger(input, "keydown", { keyCode: 13 });
     }
 }
 
@@ -75,12 +102,12 @@ function submitFormData () {
  * fill the search bar with the variabe foodInput
  * set a timeout to submit the form data after a short delay 1 second
  */
-function showMap(){
-  $("#pic").hide();
-  $("#map").show();
-  foodInput = sessionStorage.getItem("setFood");
-  $("#pac-input").val("places that sell" + foodInput + " near me");
-  setTimeout(submitFormData, 1000);
+function showMap() {
+    $("#pic").hide();
+    $("#map").show();
+    foodInput = sessionStorage.getItem("setFood");
+    $("#pac-input").val(foodInput);
+    setTimeout(submitFormData, 1000);
 }
 
 /**
@@ -99,7 +126,7 @@ function initAutocomplete() {
 
     //this is gives us the current location
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
+        navigator.geolocation.getCurrentPosition(function (position) {
             const pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
@@ -110,7 +137,7 @@ function initAutocomplete() {
             infoWindow.open(map);
             map.setCenter(pos);
             previousInfoWindow = infoWindow;
-        }, function() {
+        }, function () {
             handleLocationError(true, infoWindow, map.getCenter());
         });
     } else {
@@ -125,7 +152,7 @@ function initAutocomplete() {
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
     // Bias the SearchBox results towards current map's viewport.
-    map.addListener("bounds_changed", function() {
+    map.addListener("bounds_changed", function () {
         searchBox.setBounds(map.getBounds());
     });
 
@@ -133,20 +160,20 @@ function initAutocomplete() {
 
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
-    searchBox.addListener("places_changed", function() {
-      let places = searchBox.getPlaces();
+    searchBox.addListener("places_changed", function () {
+        let places = searchBox.getPlaces();
 
         if (places.length == 0) {
             return;
         }
         // Clear out the old markers.
-        markers.forEach(function(marker) {
+        markers.forEach(function (marker) {
             marker.setMap(null);
         });
         markers = [];
 
         let bounds = new google.maps.LatLngBounds();
-        places.forEach(function(place) {
+        places.forEach(function (place) {
             if (!place.geometry) {
                 return;
             }
@@ -155,7 +182,7 @@ function initAutocomplete() {
                 content: `${place.name}`,
                 pixelOffset: new google.maps.Size(0, 0)
             });
-           
+
 
             let markerLocation = new google.maps.Marker({
                 map: map,
@@ -164,7 +191,7 @@ function initAutocomplete() {
                 position: place.geometry.location
             });
 
-            markerLocation.addListener("click", function() {
+            markerLocation.addListener("click", function () {
                 previousInfoWindow.close();
                 infoWindow.open(map, markerLocation);
                 previousInfoWindow = infoWindow;
@@ -173,10 +200,10 @@ function initAutocomplete() {
                 const address = arrayOfString[0];
                 const cityName = arrayOfString[1];
                 const name = place.name;
-                
+
                 // send the relevant data to make the Yelp ajax call
                 // send the relevant info to Google Directions
-                requestYelpData(name , address, cityName);
+                requestYelpData(name, address, cityName);
                 displayRoute("9200 Irvine Center Dr, Irvine CA", place.formatted_address);
             });
             // Create a marker for each place.
@@ -228,10 +255,10 @@ function displayRoute(origin, destination) {
         travelMode: "DRIVING",
         avoidTolls: true,
         unitSystem: google.maps.UnitSystem.IMPERIAL,
-    }, function(response, status) {
-      
+    }, function (response, status) {
+
         if (status === "OK") {
-            if (previousRoute){
+            if (previousRoute) {
                 //here we set previous route to null so it clears the previous route
                 previousRoute.setMap(null);
             }
@@ -264,7 +291,7 @@ function computeTotalDistance(result) {
  * callback function. when user presses start over button or logo button, go
  * back to first screen
  */
-function startOver(){ 
+function startOver() {
     location.assign("../landing_page/index.html");
     sessionStorage("setFood", "");
 }
