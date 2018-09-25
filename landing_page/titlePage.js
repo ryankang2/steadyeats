@@ -8,6 +8,12 @@ let foodInput = null;
  */
 function initializeApp () {
     addClickHandler();
+    $(document).ajaxStart(function(){
+        $(".fa-spin").show();
+    });
+    $(document).ajaxComplete(function(){
+        $(".fa-spin").hide();
+    })
 }
 
 /**
