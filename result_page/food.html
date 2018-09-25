@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
     <link rel= "stylesheet" type="text/css" href="food.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script> -->
     <!--added these three for modal to work-->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script
@@ -25,7 +25,7 @@
     <script src = "nutrient.js"></script>
   </head>
   <body>
-    <div class="container">
+    <div class="wholeContainer">
       <div class="nav-wrapper orange">
         <img id="logo" src="../img/turtle_burger.png">
         <div id="nameTitle"> Steady Eats </div>
@@ -42,15 +42,15 @@
             <div id="map"></div>
           </div>
           <div id="question">
-          <button class="submit btn center-align scale-transition scale-out waves-effect waves-light" id="findMore">I want this!</button>  
-          <button class="submit btn center-align scale-transition scale-out waves-effect waves-light" id="reset">Start Over</button>
-          <button class="btn right-align scale-transition scale-out waves-effect waves-light" id="goThere">Get me there!</button>
+            <button class="submit btn center-align scale-transition scale-out waves-effect waves-light" id="findMore">I want this!</button>  
+            <button class="submit btn center-align scale-transition scale-out waves-effect waves-light" id="reset">Start Over</button>
+            <button class="btn right-align scale-transition scale-out waves-effect waves-light" id="goThere">Get me there!</button>
           </div>
         </div>
   
         <div class="col s4 offset-s1">
-            <div class = "nutrition">
-                <div>Nutrition Facts</div>
+            <!-- <div class = "nutrition">
+              <div>Nutrition Facts</div>
               <div class="nutritionTitles">
                   <div>Serving size
                     <div class="serving right-align"></div>
@@ -77,8 +77,46 @@
                       <div class="cholesterol right-align"></div>
                   </div>
               </div>
+            </div> -->
+            <div class="tab">
+              <button class="tablinks active">Nutrition</button>
+              <button class="tablinks">Yelp</button>
             </div>
-            <div class = "yelp container">
+            <!-- <ul class="tabs">
+              <li class="active tablinks">Nutrition</li>
+              <li class="tablinks">Yelp</li>
+            </ul> -->
+
+            <div class="nutrition tabcontent">
+              <div class="nutritionTitles">
+                <div>Serving size
+                  <div class="serving right-align"></div>
+                </div>
+                <div>Calories
+                    <div class="calories right-align"></div>
+                </div>
+                <div>Carbohydrate
+                    <div class="carbohydrate right-align"></div>
+                </div>
+                <div>Protein
+                    <div class="protein right-align"></div>
+                </div>
+                <div>Fat
+                    <div class="fat right-align"></div>
+                </div>
+                <div>Sugar
+                    <div class="sugar right-align"></div>
+                </div>
+                <div>Sodium
+                    <div class="sodium right-align"></div>
+                </div>
+                <div>Cholesterol
+                    <div class="cholesterol right-align"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class = "yelp container tabcontent">
                 <div class="row">
                     <img id="yelpImage" src="../img/turtle_pizza.jpeg">
                   <div class="yelpTitle nav-wrapper orange">
