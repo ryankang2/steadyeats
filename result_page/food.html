@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
     <link rel= "stylesheet" type="text/css" href="food.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script> -->
     <!--added these three for modal to work-->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script
@@ -25,7 +25,7 @@
     <script src = "nutrient.js"></script>
   </head>
   <body>
-    <div class="container">
+    <div class="wholeContainer">
       <div class="nav-wrapper orange">
         <img id="logo" src="../img/turtle_burger.png">
         <div id="nameTitle"> Steady Eats </div>
@@ -42,9 +42,9 @@
             <div id="map"></div>
           </div>
           <div id="question">
-          <button class="submit btn center-align scale-transition scale-out waves-effect waves-light" id="findMore">I want this!</button>  
-          <button class="submit btn center-align scale-transition scale-out waves-effect waves-light" id="reset">Start Over</button>
-          <button class="btn right-align scale-transition scale-out waves-effect waves-light" id="goThere">Get me there!</button>
+            <button class="submit btn center-align scale-transition scale-out waves-effect waves-light" id="findMore">I want this!</button>  
+            <button class="submit btn center-align scale-transition scale-out waves-effect waves-light" id="reset">Start Over</button>
+            <button class="btn right-align scale-transition scale-out waves-effect waves-light" id="goThere">Get me there!</button>
           </div>
         </div>
   
@@ -82,6 +82,10 @@
               <button class="tablinks active">Nutrition</button>
               <button class="tablinks">Yelp</button>
             </div>
+            <!-- <ul class="tabs">
+              <li class="active tablinks">Nutrition</li>
+              <li class="tablinks">Yelp</li>
+            </ul> -->
 
             <div class="nutrition tabcontent">
               <div class="nutritionTitles">
