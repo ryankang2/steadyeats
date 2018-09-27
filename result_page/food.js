@@ -45,7 +45,7 @@ function applyClickHandler() {
 }
 
 function openTab(event) {
-    // console.log(event.target.innerHTML);
+    console.log("event: ", event);
     let i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -55,9 +55,15 @@ function openTab(event) {
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-    $("." + (event.target.innerHTML).toLowerCase()).css("display", "block");
+    let target;
+    if(event.target.className === "fa fa-cutlery" || event.target.innerText === "Nutrition" || event.target.innerHTML === "Nutrition"){
+        target = "nutrition";
+    }
+    else{
+        target = "yelp"
+    }
+    $("." + (target).toLowerCase()).css("display", "block");
     event.currentTarget.className += " active";
-
 }
 
 /**
@@ -123,16 +129,15 @@ function initAutocomplete() {
     });
 
     infoWindow = new google.maps.InfoWindow;
-
     //this is gives us the current location
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
+        navigator.geolocation.getCurrentPosition(function(position) {
             const pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-
-            infoWindow.setPosition(pos);
+            userLoc = pos;
+            infoWindow.setPosition(pos);   
             infoWindow.setContent("You are Here");
             infoWindow.open(map);
             map.setCenter(pos);
@@ -140,11 +145,11 @@ function initAutocomplete() {
         }, function () {
             handleLocationError(true, infoWindow, map.getCenter());
         });
-    } else {
+    } 
+    else{
         // Browser doesn"t support Geolocation
         handleLocationError(false, infoWindow, map.getCenter());
     }
-
     // Create the search box and link it to the search bar element with the id of pac-input.
     let input = document.getElementById("pac-input");
     let searchBox = new google.maps.places.SearchBox(input);
@@ -191,7 +196,7 @@ function initAutocomplete() {
                 position: place.geometry.location
             });
 
-            markerLocation.addListener("click", function () {
+            markerLocation.addListener("click", function(){
                 previousInfoWindow.close();
                 infoWindow.open(map, markerLocation);
                 previousInfoWindow = infoWindow;
@@ -204,7 +209,15 @@ function initAutocomplete() {
                 // send the relevant data to make the Yelp ajax call
                 // send the relevant info to Google Directions
                 requestYelpData(name, address, cityName);
-                displayRoute("9200 Irvine Center Dr, Irvine CA", place.formatted_address);
+                // displayRoute("9200 Irvine Center Dr, Irvine CA", place.formatted_address);
+                var pos;
+                navigator.geolocation.getCurrentPosition(function(posit){
+                    pos = {
+                        lat: posit.coords.latitude,
+                        lng: posit.coords.longitude
+                    }
+                    displayRoute(pos, place.formatted_address);
+                })
             });
             // Create a marker for each place.
             markers.push(markerLocation);
@@ -244,7 +257,6 @@ function displayRoute(origin, destination) {
     $("#direction").empty();
     let service = new google.maps.DirectionsService;
     let display = new google.maps.DirectionsRenderer({
-
         draggable: true,
         map: map,
         panel: document.getElementById("direction")

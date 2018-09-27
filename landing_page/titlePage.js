@@ -8,6 +8,7 @@ let foodInput = null;
  */
 function initializeApp () {
     addClickHandler();
+    //adds spinner when making ajax call
     $(document).ajaxStart(function(){
         $(".fa-spin").show();
     });
