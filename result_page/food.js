@@ -71,11 +71,18 @@ function openTab(event) {
         else{
             $(".list").show();
         }
+        if($("#findMore").css("display") === "inline-block"){
+            $(".list").hide();
+        }
+
     }
     $("." + (target).toLowerCase()).css("display", "block");
     event.currentTarget.className += " active";
 }
 
+/**
+ * when user presses back arrow, return back to list
+ */
 function backToList(){
     $(".backToList").hide();
     $(".info").hide();
@@ -229,6 +236,31 @@ function initAutocomplete() {
             $(".list").append(listItem);
 
             markerLocation.addListener("click", function(){
+                $(".list").hide();
+                $(".backToList").css("display", "inline-block");
+                previousInfoWindow.close();
+                infoWindow.open(map, markerLocation);
+                previousInfoWindow = infoWindow;
+                // break the address up into street address , cit
+                const arrayOfString = place.formatted_address.split(",");
+                const address = arrayOfString[0];
+                const cityName = arrayOfString[1];
+                const name = place.name;
+
+                // send the relevant data to make the Yelp ajax call
+                // send the relevant info to Google Directions
+                requestYelpData(name, address, cityName);
+                navigator.geolocation.getCurrentPosition(function(position){
+                    const pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    }
+                    displayRoute(pos, place.formatted_address);
+                })
+            });
+
+            //add click handlers to each list item that shows on map
+            listItem.on("click", function(){
                 $(".list").hide();
                 $(".backToList").css("display", "inline-block");
                 previousInfoWindow.close();

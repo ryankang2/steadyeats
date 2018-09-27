@@ -274,6 +274,11 @@ table{
   border: 1px solid red;
 }
 
+.listItem:hover{
+  background-color: lightgrey;
+  cursor: pointer;
+}
+
 .orgImg{
   border: 1px solid blue;
   width: 21%;
