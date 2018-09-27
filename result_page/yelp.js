@@ -9,6 +9,7 @@ let yelpResponse = null;
 * Function that pulls yelp API with keyword/address search and current location (city)
 */
 function requestYelpData (name, address, city) {
+    $(".row").css("display", "block");
     let customUrl = "https://yelp.ongandy.com/businesses/matches";
     let key = {
         api_key: "8omc0Yh_VpsNVtwSesxDrxKYNBTjSx4unT_tUQKxv7FpvWGn9QmAhpI2XlvNHaN3NDrwdY2UahjFHb5Qu6KhuzlLFQ04LzbCJT1BocPCAAiMEJpovT3fWX4IoKtXW3Yx",

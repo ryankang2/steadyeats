@@ -12,7 +12,7 @@ let previousRoute = false;
  */
 function initializeApp() {
     applyClickHandler();
-    $("#foodName").text(foodName).css("color", "orange");
+    $("#foodName").text(`You searched for: ${foodName}`);
 }
 
 /**
@@ -27,6 +27,7 @@ function initializeApp() {
  */
 function applyClickHandler() {
     $("#findMore").click(showMap);
+    $(".backToList").click(backToList);
     $("#reset").click(startOver);
     $("#logo").click(startOver);
     $(".tablinks").click(openTab);
@@ -45,7 +46,6 @@ function applyClickHandler() {
 }
 
 function openTab(event) {
-    console.log("event: ", event);
     let i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -58,12 +58,28 @@ function openTab(event) {
     let target;
     if(event.target.className === "fa fa-cutlery" || event.target.innerText === "Nutrition" || event.target.innerHTML === "Nutrition"){
         target = "nutrition";
+        $(".list").hide();
+        $(".backToList").hide();
     }
     else{
-        target = "yelp"
+        target = "yelp";
+        //if user pressed on restaurant, show back button, hide list
+        if($(".info").css("display") === "block"){
+            $(".backToList").show();
+            $(".list").hide();
+        }
+        else{
+            $(".list").show();
+        }
     }
     $("." + (target).toLowerCase()).css("display", "block");
     event.currentTarget.className += " active";
+}
+
+function backToList(){
+    $(".backToList").hide();
+    $(".info").hide();
+    $(".list").show();
 }
 
 /**
@@ -109,6 +125,8 @@ function submitFormData() {
  * set a timeout to submit the form data after a short delay 1 second
  */
 function showMap() {
+    $("#findMore").hide();
+    $(".list").show();
     $("#pic").hide();
     $("#map").show();
     foodInput = sessionStorage.getItem("setFood");
@@ -178,6 +196,7 @@ function initAutocomplete() {
         markers = [];
 
         let bounds = new google.maps.LatLngBounds();
+        console.log(places);
         places.forEach(function (place) {
             if (!place.geometry) {
                 return;
@@ -191,12 +210,27 @@ function initAutocomplete() {
 
             let markerLocation = new google.maps.Marker({
                 map: map,
-                icon: "http://maps.google.com/mapfiles/ms/icons/orange-dot.png",
+                icon: "http://maps.google.com/mapfiles/kml/paddle/red-circle.png",
                 title: place.name,
                 position: place.geometry.location
             });
 
+            //create a list of restaurants
+            let listItem = $("<div>").addClass("listItem");
+            // let startingIndex = place.photos[0].html_attributions[0].indexOf('"');
+            // let endingIndex = place.photos[0].html_attributions[0].indexOf(">");
+            // let imgSrc = place.photos[0].html_attributions[0].substring(startingIndex, endingIndex);
+            let orgPic = $("<img>").addClass("orgImg").attr("src", "../img/turtle_pizza.jpeg");
+            let generalOrgInfo = $("<div>").addClass("generalOrgInfo");
+            let orgName = $("<div>").addClass("orgName").text(place.name);
+            generalOrgInfo.append(orgName);
+            listItem.append(generalOrgInfo);
+            listItem.append(orgPic);
+            $(".list").append(listItem);
+
             markerLocation.addListener("click", function(){
+                $(".list").hide();
+                $(".backToList").css("display", "inline-block");
                 previousInfoWindow.close();
                 infoWindow.open(map, markerLocation);
                 previousInfoWindow = infoWindow;
@@ -209,12 +243,10 @@ function initAutocomplete() {
                 // send the relevant data to make the Yelp ajax call
                 // send the relevant info to Google Directions
                 requestYelpData(name, address, cityName);
-                // displayRoute("9200 Irvine Center Dr, Irvine CA", place.formatted_address);
-                var pos;
-                navigator.geolocation.getCurrentPosition(function(posit){
-                    pos = {
-                        lat: posit.coords.latitude,
-                        lng: posit.coords.longitude
+                navigator.geolocation.getCurrentPosition(function(position){
+                    const pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
                     }
                     displayRoute(pos, place.formatted_address);
                 })
@@ -306,4 +338,22 @@ function computeTotalDistance(result) {
 function startOver() {
     location.assign("../landing_page/index.html");
     sessionStorage("setFood", "");
+}
+
+
+function getDistance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo){
+    $earthRadius = 3958.755866;
+    $latFrom = floatval(deg2rad($latitudeFrom));
+    $lonFrom = floatval(deg2rad($longitudeFrom));
+    $latTo = floatval(deg2rad($latitudeTo));
+    $lonTo = floatval(deg2rad($longitudeTo));
+    
+    $lonDelta = $lonTo - $lonFrom;
+    $a = pow(cos($latTo) * sin($lonDelta), 2) +
+    pow(cos($latFrom) * sin($latTo) - sin($latFrom) * cos($latTo) * cos($lonDelta), 2);
+    $b = sin($latFrom) * sin($latTo) + cos($latFrom) * cos($latTo) * cos($lonDelta);
+
+    $angle = atan2(sqrt($a), $b);
+
+    return $angle * $earthRadius;
 }
