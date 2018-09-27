@@ -44,10 +44,6 @@ table{
   position: relative
 }
 
-#foodName {
-  font-size: 2.5em
-}
-
 #logo {
   display: inline-block;
   width: 5%;
@@ -68,9 +64,9 @@ table{
     font-weight: bold;
 }
 
-.foodName {
-  font-size: 3em;
-  text-align: center;
+#foodName {
+  font-size: 1.5em;
+  color: orange;
 
 }
 
@@ -111,6 +107,10 @@ table{
   border: none;
   border-radius: 10px;
   box-shadow: 0 3px #999;
+  margin-top: 5%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 #findMore:hover {
@@ -169,6 +169,7 @@ table{
   width: 65%;
 }
 
+
 #map {
   height: 50vh;
 }
@@ -182,6 +183,10 @@ table{
 .yelp > div {
   border: 2px solid black;
   margin-top: 10%;
+}
+
+.yelp > .row{
+  display: none;
 }
 
 .yelpTitle {
@@ -255,6 +260,49 @@ table{
   width: 50%;
 }
 
+
+.list{
+  display: none;
+  width: 100%;
+  border: 2px solid green;
+  margin-top: 25px;
+  overflow-y: scroll;
+  height: 300px;
+}
+
+.listItem{
+  border: 1px solid red;
+}
+
+.listItem:hover{
+  background-color: lightgrey;
+  cursor: pointer;
+}
+
+.orgImg{
+  border: 1px solid blue;
+  width: 21%;
+}
+
+
+.orgName{
+  font-size: 14px;
+}
+
+.generalOrgInfo{
+  border: 1px solid turquoise;
+  width: 30%;
+  float: right;
+}
+
+.backToList{
+  display: none;
+  margin-top: 4%;
+}
+
+.backToList:hover{
+  cursor: pointer;
+}
 
 @media only screen and (max-width: 600px) {
   .row .col.offset-s1{
