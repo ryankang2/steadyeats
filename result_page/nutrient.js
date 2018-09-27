@@ -23,49 +23,6 @@ function displayFood(jsonResponse){
     storeNutritionToDOM(jsonResponse.foods[0])
 }
 
-/**
- * AJAX call to nutritonix to get nutrition info
- */
-// function nutritionCallFromServer(){
-//    let userQuery = food
-//    let dataForServer = {
-//        "Content-Type": "application/x-www-form-urlencoded",
-//         "x-app-id": "0657689d",
-//         "x-app-key": "1c577a065dc2109313e314fdb410b965",
-//     //    "x-app-id": "ff571cbd",
-//     //    "x-app-key": "f4112a83315f79c5cdff346b54f08998",
-//        "x-remote-user-id": "0",
-//        "Cache-Control": "no-cache",
-//        "query": 'apple',
-//    };
-//    let options = {
-//        dataType: "json",
-//        url: "https://trackapi.nutritionix.com/v2/natural/nutrients",
-//        headers: dataForServer,
-//        data: {
-//            "query": userQuery
-//        },
-//        method: "post",
-//        success: function(response) {
-//            let src = response.foods[0].photo.highres;
-//            if(!src){
-//                 src = "img/noimage.png";
-//            }
-//            let img = $("<img>").attr("src", src);
-//            $("#pic").html(img);
-//            storeNutritionToDOM(response.foods[0])
-//        },
-//        error: function(error){
-//            if (error.statusText === "Not Found") {
-//                alert("Couldn't find " + food + "! Press OK to go back to home screen");
-//                location.assign("index.html");
-//                sessionStorage("setFood", "");
-//            }
-//        }
-//    }
-//    $.ajax(options);
-// }
-
 
 /**
  * Updates DOM with nutrition facts
