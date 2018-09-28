@@ -87,9 +87,9 @@ function createYelpDisplay(response) {
     $("#yelpImage").attr("src", businessImage);
     let openStatus = response.hours[0].is_open_now;
     if(openStatus) {
-        $(".openOrClosed").text("OPEN").css("color","green");
+        $(".openOrClosed").text("OPEN NOW").css("color","green");
     } else {
-        $(".openOrClosed").text("CLOSED").css("color","red");
+        $(".openOrClosed").text("CLOSED NOW").css("color","red");
     }
     $("#goThere").addClass("scale-in");
 }

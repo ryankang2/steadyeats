@@ -161,11 +161,16 @@ function initAutocomplete() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-            userLoc = pos;
             infoWindow.setPosition(pos);   
             infoWindow.setContent("You are Here");
             infoWindow.open(map);
             map.setCenter(pos);
+            var marker = new google.maps.Marker({
+                // position: pos,
+                map: map,
+                icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+            });
+            marker.setMap(map);
             previousInfoWindow = infoWindow;
         }, function () {
             handleLocationError(true, infoWindow, map.getCenter());
@@ -241,7 +246,7 @@ function initAutocomplete() {
                 previousInfoWindow.close();
                 infoWindow.open(map, markerLocation);
                 previousInfoWindow = infoWindow;
-                // break the address up into street address , cit
+                // break the address up into street address , city
                 const arrayOfString = place.formatted_address.split(",");
                 const address = arrayOfString[0];
                 const cityName = arrayOfString[1];
@@ -266,7 +271,7 @@ function initAutocomplete() {
                 previousInfoWindow.close();
                 infoWindow.open(map, markerLocation);
                 previousInfoWindow = infoWindow;
-                // break the address up into street address , cit
+                // break the address up into street address , city
                 const arrayOfString = place.formatted_address.split(",");
                 const address = arrayOfString[0];
                 const cityName = arrayOfString[1];
