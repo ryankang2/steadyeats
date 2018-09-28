@@ -74,7 +74,6 @@ function submitClicked () {
         $("#error").text("Please input a food item");
         return;
     }
-    console.log(returnedFood);
     nutritionCallFromServer(returnedFood);
 }
 
@@ -98,8 +97,8 @@ function retrieveInput () {
 function nutritionCallFromServer(food){
     let dataForServer = {
         "Content-Type": "application/x-www-form-urlencoded",
-         "x-app-id": "0657689d",
-         "x-app-key": "1c577a065dc2109313e314fdb410b965",
+         "x-app-id": config.NUTRITION_ID,
+         "x-app-key": config.NUTRITION_KEY,
         "x-remote-user-id": "0",
         "Cache-Control": "no-cache",
     };

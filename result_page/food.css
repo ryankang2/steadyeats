@@ -275,7 +275,7 @@ table{
 }
 
 .listItem{
-  border: 1px solid red;
+  border: 1px solid orange;
 }
 
 .listItem:hover{
@@ -291,10 +291,10 @@ table{
 
 .orgName{
   font-size: 14px;
+  font-weight: bold;
 }
 
 .generalOrgInfo{
-  border: 1px solid turquoise;
   width: 45%;
   float: right;
 }
