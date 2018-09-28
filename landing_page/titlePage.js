@@ -59,9 +59,8 @@ function addClickHandler () {
     $(".submit").click(submitClicked);
     //when enter is pressed
     $(document).keyup(function(event) {
-        if ($("#food").is(":focus") && event.key == "Enter") {
-            retrieveInput();
-            changePage();
+        if($("#food").is(":focus") && event.key == "Enter") {
+            submitClicked();
         }
     });
 }
@@ -75,6 +74,7 @@ function submitClicked () {
         $("#error").text("Please input a food item");
         return;
     }
+    console.log(returnedFood);
     nutritionCallFromServer(returnedFood);
 }
 
