@@ -147,6 +147,10 @@ function showMap() {
  */
 
 function initAutocomplete() {
+    let userLocation = {
+        lat: 0,
+        lng: 0
+    };
     map = new google.maps.Map(document.getElementById("map"), {
         center: origin,
         zoom: 13,
@@ -161,6 +165,8 @@ function initAutocomplete() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
+            userLocation.lat = position.coords.latitude;
+            userLocation.lng = position.coords.longitude;
             infoWindow.setPosition(pos);   
             infoWindow.setContent("You are Here");
             infoWindow.open(map);
@@ -229,13 +235,14 @@ function initAutocomplete() {
 
             //create a list of restaurants
             let listItem = $("<div>").addClass("listItem");
-            // let startingIndex = place.photos[0].html_attributions[0].indexOf('"');
-            // let endingIndex = place.photos[0].html_attributions[0].indexOf(">");
-            // let imgSrc = place.photos[0].html_attributions[0].substring(startingIndex, endingIndex);
             let orgPic = $("<img>").addClass("orgImg").attr("src", "../img/turtle_pizza.jpeg");
             let generalOrgInfo = $("<div>").addClass("generalOrgInfo");
             let orgName = $("<div>").addClass("orgName").text(place.name);
+            let orgAddress = $("<div>").addClass("orgAddress").text(place.formatted_address);
+            let distance = $("<div>").addClass("distance").text(getDistance(userLocation.lat, userLocation.lng, place.geometry.viewport.f.b, place.geometry.viewport.b.b) + " miles");
             generalOrgInfo.append(orgName);
+            generalOrgInfo.append(orgAddress);
+            generalOrgInfo.append(distance);
             listItem.append(generalOrgInfo);
             listItem.append(orgPic);
             $(".list").append(listItem);
@@ -377,20 +384,33 @@ function startOver() {
     sessionStorage("setFood", "");
 }
 
-
-function getDistance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo){
-    $earthRadius = 3958.755866;
-    $latFrom = floatval(deg2rad($latitudeFrom));
-    $lonFrom = floatval(deg2rad($longitudeFrom));
-    $latTo = floatval(deg2rad($latitudeTo));
-    $lonTo = floatval(deg2rad($longitudeTo));
-    
-    $lonDelta = $lonTo - $lonFrom;
-    $a = pow(cos($latTo) * sin($lonDelta), 2) +
-    pow(cos($latFrom) * sin($latTo) - sin($latFrom) * cos($latTo) * cos($lonDelta), 2);
-    $b = sin($latFrom) * sin($latTo) + cos($latFrom) * cos($latTo) * cos($lonDelta);
-
-    $angle = atan2(sqrt($a), $b);
-
-    return $angle * $earthRadius;
+/**
+ * Returns distance between 2 (lat, lng) points. Utilize this so there's no use for Google Maps
+ * API to return distance (saves API calls)
+ * @param {*} latitudeFrom 
+ * @param {*} longitudeFrom 
+ * @param {*} latitudeTo 
+ * @param {*} longitudeTo 
+ * @return miles between 2 points
+ */
+function getDistance(latitudeFrom, longitudeFrom, latitudeTo, longitudeTo){
+    let earthRadius = 3958.755866;
+    let dLat = deg2rad(latitudeTo-latitudeFrom);  // deg2rad below
+    let dLon = deg2rad(longitudeTo-longitudeFrom); 
+    let a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(deg2rad(latitudeFrom)) * Math.cos(deg2rad(latitudeTo)) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2)
+      ; 
+    var angle = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    return (earthRadius * angle).toFixed(2);
 }
+
+/**
+ * Helper function for getDistance()
+ * @param {*} deg 
+ * @return radians of a given degree
+ */
+function deg2rad(deg)  {
+    return deg * Math.PI / 180;
+ }

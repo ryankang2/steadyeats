@@ -69,6 +69,7 @@ function getYelpDetails (id) {
  * Function the displays the data to dom dynamically
  */
 function createYelpDisplay(response) {
+    console.log("yelpresponse: ", response);
     let name = response.name;
     $(".name").text(name);
     let phone = response.display_phone;
@@ -81,7 +82,8 @@ function createYelpDisplay(response) {
     // $(".type").text(type);
     let link = response.url;
     $(".link").text("View on Yelp").attr("href", link).attr("target", "_blank");
-    let displayAddress = response.location.display_address[0];
+    let displayAddress = response.location.address1 + ", " + 
+                        response.location.city + ", " + response.location.state;
     $(".address").text(displayAddress);
     let businessImage = response.image_url;
     $("#yelpImage").attr("src", businessImage);
