@@ -28,7 +28,7 @@ function initializeApp() {
 function applyClickHandler() {
     $("#findMore").click(showMap);
     $(".backToList").click(backToList);
-    $("#reset").click(startOver);
+    $(".reset").click(startOver);
     $("#logo").click(startOver);
     $(".tablinks").click(openTab);
     $("#pac-input").hide();

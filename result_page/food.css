@@ -61,6 +61,17 @@ table{
   cursor: pointer;
 }
 
+.reset{
+  display: inline;
+}
+
+.reset img{
+  width: 25px;
+}
+
+.reset:hover{
+  cursor: pointer;
+}
 
 #nameTitle{
     display: inline;
