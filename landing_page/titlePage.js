@@ -10,10 +10,10 @@ function initializeApp () {
     addClickHandler();
     //adds spinner when making ajax call
     $(document).ajaxStart(function(){
-        $(".fa-spin").show();
+        $(".loader").show();
     });
     $(document).ajaxComplete(function(){
-        $(".fa-spin").hide();
+        $(".loader").hide();
     })
 }
 

@@ -130,6 +130,32 @@ table{
   transform: translateY(3px);
 }
 
+.loader{
+  display: none;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 190px;
+}
+
+.loader > img{
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {  
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+
 #reset {
   background-color: red;
   outline: none;
@@ -174,7 +200,18 @@ table{
 }
 
 .yelp {
+  display: none;
   width: 65%;
+}
+
+.noYelpInfo{
+  display:none;
+  text-align: center;
+  font-weight: bold;
+}
+
+.noYelpInfo img{
+  width: 100%;
 }
 
 
@@ -320,3 +357,4 @@ table{
     right: auto; 
   }
 }
+

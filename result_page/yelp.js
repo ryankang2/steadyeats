@@ -25,8 +25,20 @@ function requestYelpData (name, address, city) {
         method: "POST",
         dataType: "json",
         success: function (response) {
-            let businessId= response.businesses[0].id;
-            getYelpDetails(businessId);
+            console.log(response);
+            if(response.businesses.length === 0){                
+                $(".yelp").hide();
+                // let noYelpInfo = $("<div>").text("NONE");
+                // $(".yelp").append(noYelpInfo);
+                $(".noYelpInfo").show();
+                
+            }
+            else{
+                $(".yelp").show();
+                let businessId= response.businesses[0].id;
+                getYelpDetails(businessId);
+            }
+            
         },
         error: function (error) {
             console.log("error from requestYelpData: ", error);

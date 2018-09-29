@@ -13,6 +13,12 @@ let previousRoute = false;
 function initializeApp() {
     applyClickHandler();
     $("#foodName").text(`You searched for: ${foodName}`);
+    // $(document).ajaxStart(function(){
+    //     $(".loader").show();
+    // });
+    // $(document).ajaxComplete(function(){
+    //     $(".loader").hide();
+    // })
 }
 
 /**
@@ -85,6 +91,7 @@ function openTab(event) {
  */
 function backToList(){
     $(".backToList").hide();
+    $(".noYelpInfo").hide();
     $(".info").hide();
     $(".list").show();
 }
@@ -139,10 +146,11 @@ function showMap() {
     foodInput = sessionStorage.getItem("setFood");
     $("#pac-input").val(foodInput);
     setTimeout(submitFormData, 1000);
+    $(".loader").show();
 }
 
 /**
- * Make a function that creats a new google map attached to the div with the 
+ * Make a function that creates a new google map attached to the div with the 
  * id of map, cet the center to the origin, zoom to 13, and mapTypeId to roadmap.
  */
 
@@ -207,6 +215,7 @@ function initAutocomplete() {
         if (places.length == 0) {
             return;
         }
+        $(".loader").hide();
         // Clear out the old markers.
         markers.forEach(function (marker) {
             marker.setMap(null);
@@ -214,7 +223,7 @@ function initAutocomplete() {
         markers = [];
 
         let bounds = new google.maps.LatLngBounds();
-        console.log(places);
+        // console.log(places);
         places.forEach(function (place) {
             if (!place.geometry) {
                 return;
@@ -238,8 +247,8 @@ function initAutocomplete() {
             let orgPic = $("<img>").addClass("orgImg").attr("src", "../img/turtle_pizza.jpeg");
             let generalOrgInfo = $("<div>").addClass("generalOrgInfo");
             let orgName = $("<div>").addClass("orgName").text(place.name);
-            let orgAddress = $("<div>").addClass("orgAddress").text(place.formatted_address);
-            let distance = $("<div>").addClass("distance").text(getDistance(userLocation.lat, userLocation.lng, place.geometry.viewport.f.b, place.geometry.viewport.b.b) + " miles");
+            let orgAddress = $("<div>").addClass("orgAddress").text("\u2022" + " " + place.formatted_address);
+            let distance = $("<div>").addClass("distance").text("\u2022" + " " + getDistance(userLocation.lat, userLocation.lng, place.geometry.viewport.f.b, place.geometry.viewport.b.b) + " miles");
             generalOrgInfo.append(orgName);
             generalOrgInfo.append(orgAddress);
             generalOrgInfo.append(distance);
@@ -271,6 +280,7 @@ function initAutocomplete() {
                 })
             });
 
+
             //add click handlers to each list item that shows on map
             listItem.on("click", function(){
                 $(".list").hide();
@@ -295,6 +305,13 @@ function initAutocomplete() {
                     displayRoute(pos, place.formatted_address);
                 })
             });
+
+            listItem.hover(function(){
+                markerLocation.setIcon("http://maps.google.com/mapfiles/kml/paddle/wht-circle.png");
+            }, function(){
+                markerLocation.setIcon("http://maps.google.com/mapfiles/kml/paddle/red-circle.png");
+            })
+
             // Create a marker for each place.
             markers.push(markerLocation);
 
