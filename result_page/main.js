@@ -13,12 +13,6 @@ let previousRoute = false;
 function initializeApp() {
     applyClickHandler();
     $("#foodName").text(`You searched for: ${foodName}`);
-    // $(document).ajaxStart(function(){
-    //     $(".loader").show();
-    // });
-    // $(document).ajaxComplete(function(){
-    //     $(".loader").hide();
-    // })
 }
 
 /**
@@ -279,6 +273,13 @@ function initAutocomplete() {
                     displayRoute(pos, place.formatted_address);
                 })
             });
+
+            markerLocation.addListener("mouseover", function(){
+                markerLocation.setIcon("http://maps.google.com/mapfiles/kml/paddle/wht-circle.png");
+            })
+            markerLocation.addListener("mouseout", function(){
+                markerLocation.setIcon("http://maps.google.com/mapfiles/kml/paddle/red-circle.png");
+            })
 
 
             //add click handlers to each list item that shows on map
