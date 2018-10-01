@@ -1,7 +1,6 @@
 $(document).ready(initializeApp);
 
 let infoWindow;
-let origin = { lat: 33.6348676, lng: -117.7405317 };
 let foodName = sessionStorage.getItem("setFood").toLowerCase();
 let map;
 let previousInfoWindow = false;
@@ -154,7 +153,6 @@ function initAutocomplete() {
         lng: 0
     };
     map = new google.maps.Map(document.getElementById("map"), {
-        center: origin,
         zoom: 13,
         mapTypeId: "roadmap"
     });
