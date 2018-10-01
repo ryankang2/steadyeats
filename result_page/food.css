@@ -61,6 +61,17 @@ table{
   cursor: pointer;
 }
 
+.reset{
+  display: inline;
+}
+
+.reset img{
+  width: 25px;
+}
+
+.reset:hover{
+  cursor: pointer;
+}
 
 #nameTitle{
     display: inline;
@@ -305,14 +316,14 @@ table{
 .list{
   display: none;
   width: 100%;
-  border: 2px solid green;
+  border: 4px solid green;
   margin-top: 25px;
   overflow-y: scroll;
   height: 75vh;
 }
 
 .listItem{
-  border: 1px solid orange;
+  border: 2px solid orange;
 }
 
 .listItem:hover{
@@ -320,10 +331,10 @@ table{
   cursor: pointer;
 }
 
-.orgImg{
+/* .orgImg{
   border: 1px solid blue;
   width: 21%;
-}
+} */
 
 
 .orgName{
@@ -333,7 +344,7 @@ table{
 
 .generalOrgInfo{
   width: 45%;
-  float: right;
+  /* float: left; */
 }
 
 .backToList{

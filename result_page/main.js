@@ -28,7 +28,7 @@ function initializeApp() {
 function applyClickHandler() {
     $("#findMore").click(showMap);
     $(".backToList").click(backToList);
-    $("#reset").click(startOver);
+    $(".reset").click(startOver);
     $("#logo").click(startOver);
     $(".tablinks").click(openTab);
     $("#pac-input").hide();
@@ -169,12 +169,12 @@ function initAutocomplete() {
             };
             userLocation.lat = position.coords.latitude;
             userLocation.lng = position.coords.longitude;
-            infoWindow.setPosition(pos);   
-            infoWindow.setContent("You are Here");
-            infoWindow.open(map);
+            // infoWindow.setPosition(pos);   
+            // infoWindow.setContent("You are Here");
+            // infoWindow.open(map);
             map.setCenter(pos);
             var marker = new google.maps.Marker({
-                // position: pos,
+                position: pos,
                 map: map,
                 icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
             });
@@ -217,7 +217,7 @@ function initAutocomplete() {
         markers = [];
 
         let bounds = new google.maps.LatLngBounds();
-        // console.log(places);
+        console.log(places);
         places.forEach(function (place) {
             if (!place.geometry) {
                 return;
@@ -238,7 +238,7 @@ function initAutocomplete() {
 
             //create a list of restaurants
             let listItem = $("<div>").addClass("listItem");
-            let orgPic = $("<img>").addClass("orgImg").attr("src", "../img/turtle_pizza.jpeg");
+            // let orgPic = $("<img>").addClass("orgImg").attr("src", "../img/turtle_pizza.jpeg");
             let generalOrgInfo = $("<div>").addClass("generalOrgInfo");
             let orgName = $("<div>").addClass("orgName").text(place.name);
             let orgAddress = $("<div>").addClass("orgAddress").text("\u2022" + " " + place.formatted_address);
@@ -247,7 +247,7 @@ function initAutocomplete() {
             generalOrgInfo.append(orgAddress);
             generalOrgInfo.append(distance);
             listItem.append(generalOrgInfo);
-            listItem.append(orgPic);
+            // listItem.append(orgPic);
             $(".list").append(listItem);
 
             markerLocation.addListener("click", function(){
@@ -276,9 +276,12 @@ function initAutocomplete() {
 
             markerLocation.addListener("mouseover", function(){
                 markerLocation.setIcon("http://maps.google.com/mapfiles/kml/paddle/wht-circle.png");
+                listItem.css("background-color", "lightgrey");
             })
             markerLocation.addListener("mouseout", function(){
                 markerLocation.setIcon("http://maps.google.com/mapfiles/kml/paddle/red-circle.png");
+                listItem.css("background-color", "white");
+
             })
 
 
