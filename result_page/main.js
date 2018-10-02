@@ -229,7 +229,7 @@ function initAutocomplete() {
 
             let markerLocation = new google.maps.Marker({
                 map: map,
-                icon: "http://maps.google.com/mapfiles/kml/paddle/red-circle.png",
+                icon: "../img/red-circle.png",
                 title: place.name,
                 position: place.geometry.location
             });
@@ -273,11 +273,11 @@ function initAutocomplete() {
             });
 
             markerLocation.addListener("mouseover", function(){
-                markerLocation.setIcon("http://maps.google.com/mapfiles/kml/paddle/wht-circle.png");
+                markerLocation.setIcon("../img/wht-circle.png");
                 listItem.css("background-color", "lightgrey");
             })
             markerLocation.addListener("mouseout", function(){
-                markerLocation.setIcon("http://maps.google.com/mapfiles/kml/paddle/red-circle.png");
+                markerLocation.setIcon("../img/red-circle.png");
                 listItem.css("background-color", "white");
 
             })
@@ -309,9 +309,9 @@ function initAutocomplete() {
             });
 
             listItem.hover(function(){
-                markerLocation.setIcon("http://maps.google.com/mapfiles/kml/paddle/wht-circle.png");
+                markerLocation.setIcon("../img/wht-circle.png");
             }, function(){
-                markerLocation.setIcon("http://maps.google.com/mapfiles/kml/paddle/red-circle.png");
+                markerLocation.setIcon("../img/red-circle.png");
             })
 
             // Create a marker for each place.
