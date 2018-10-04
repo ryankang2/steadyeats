@@ -84,6 +84,7 @@ table{
 }
 
 #foodName {
+  margin-left: 2%;
   font-size: 1.5em;
   color: orange;
   display: inline;
@@ -155,6 +156,11 @@ table{
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
 }
+
+.yelpLoader{
+  display: none;
+}
+
 
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }

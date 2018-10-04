@@ -1,16 +1,17 @@
 $(document).ready(initializeApp);
 
-let food = sessionStorage.getItem("setFood");
-let response = localStorage.getItem("resp");
+// let food = sessionStorage.getItem("setFood");
 
 /**
  * Once DOM is ready, get nutrition from server and add animations
  * to submit and reset button
  */
 function initializeApp(){
+    let response = localStorage.getItem("resp");
     $(".submit").addClass("scale-in");
     $("#reset").addClass("scale-in");
     displayFood(JSON.parse(response));
+
 }
 
 function displayFood(jsonResponse){
@@ -18,8 +19,8 @@ function displayFood(jsonResponse){
     if(!src){
         src = "../img/noimage.png";
     }
-    let img = $("<img>").attr("src", src).addClass("img");
-    $("#pic").html(img);
+    let img = $("<img>").attr("src", src);
+    $("#pic").append(img);    
     storeNutritionToDOM(jsonResponse.foods[0]);
     displayChart(jsonResponse.foods[0]);
 }

@@ -243,7 +243,7 @@ function initAutocomplete() {
             $(".list").append(listItem);
 
             markerLocation.addListener("click", function(){
-                $(".list").hide();
+                $(".list").css("display", "none");
                 $(".backToList").css("display", "inline-block");
                 previousInfoWindow.close();
                 infoWindow.open(map, markerLocation);
@@ -279,7 +279,9 @@ function initAutocomplete() {
 
             //add click handlers to each list item that shows on map
             listItem.on("click", function(){
-                $(".list").hide();
+                $(".yelp").hide();
+                $(".yelpLoader").show();
+                $(".list").css("display", "none");
                 $(".backToList").css("display", "inline-block");
                 previousInfoWindow.close();
                 infoWindow.open(map, markerLocation);
