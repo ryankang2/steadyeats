@@ -86,7 +86,7 @@ table{
 #foodName {
   font-size: 1.5em;
   color: orange;
-
+  display: inline;
 }
 
 #mapAndPic {
@@ -98,6 +98,7 @@ table{
   width: 55%;
   display: block;
   margin: 0 auto;
+  /* background: transparent url("../img/turtle_burger.png") no-repeat scroll center center; */
 }
 
 .nutritionTitles {
@@ -165,8 +166,6 @@ table{
   100% { transform: rotate(360deg); }
 }
 
-
-
 #reset {
   background-color: red;
   outline: none;
@@ -179,6 +178,7 @@ table{
   background-color: green;
   border-radius: 10px;
   box-shadow: 0 3px #999;
+  margin: 10px 0;
 }
 
 #goThere:hover {

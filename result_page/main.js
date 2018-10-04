@@ -32,8 +32,6 @@ function applyClickHandler() {
     $(".tablinks").click(openTab);
     $("#pac-input").hide();
     modalActivity();
-
-
     openTab({
         target: {
             innerHTML: "Nutrition",
@@ -167,14 +165,11 @@ function initAutocomplete() {
             };
             userLocation.lat = position.coords.latitude;
             userLocation.lng = position.coords.longitude;
-            // infoWindow.setPosition(pos);   
-            // infoWindow.setContent("You are Here");
-            // infoWindow.open(map);
             map.setCenter(pos);
             var marker = new google.maps.Marker({
                 position: pos,
                 map: map,
-                icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                icon: "../img/blue-dot.png",
             });
             marker.setMap(map);
             previousInfoWindow = infoWindow;
@@ -215,7 +210,6 @@ function initAutocomplete() {
         markers = [];
 
         let bounds = new google.maps.LatLngBounds();
-        console.log(places);
         places.forEach(function (place) {
             if (!place.geometry) {
                 return;

@@ -18,8 +18,8 @@ function displayFood(jsonResponse){
     if(!src){
         src = "../img/noimage.png";
     }
-    let img = $("<img>").attr("src", src);
-     $("#pic").html(img);
+    let img = $("<img>").attr("src", src).addClass("img");
+    $("#pic").html(img);
     storeNutritionToDOM(jsonResponse.foods[0]);
     displayChart(jsonResponse.foods[0]);
 }
@@ -33,9 +33,21 @@ function storeNutritionToDOM (foodObj) {
    $(".serving").text(foodObj.serving_qty + " " + foodObj.serving_unit);
    $(".calories").text(foodObj.nf_calories + " cal");
    $(".carbohydrate").text(foodObj.nf_total_carbohydrate + " g");
+   if(foodObj.nf_dietary_fiber === null){
+       foodObj.nf_dietary_fiber = 0;
+   }
    $(".fiber").text(foodObj.nf_dietary_fiber + " g");
+   if(foodObj.nf_protein === null){
+       foodObj.nf_protein = 0;
+   }
    $(".protein").text(foodObj.nf_protein + " g");
+   if(foodObj.nf_total_fat === null){
+       foodObj.nf_total_fat = 0;
+   }
    $(".fat").text(foodObj.nf_total_fat + " g");
+   if(foodObj.nf_saturated_fat === null){
+       foodObj.nf_saturated_fat = 0;
+   }
    $(".saturatedFat").text(foodObj.nf_saturated_fat + " g");
    if(foodObj.nf_sugars === null){
     foodObj.nf_sugars = 0;

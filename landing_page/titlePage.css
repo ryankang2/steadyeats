@@ -46,6 +46,9 @@ body {
     animation: spin 2s linear infinite;
 }
 
+.row{
+    margin-bottom: 0px !important;
+}
 
 
 @-webkit-keyframes spin {
@@ -56,4 +59,10 @@ body {
   @keyframes spin {  
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+  }
+
+  @media only screen and (max-width: 667px){
+      #nameImage{
+          height: 80px;
+      }
   }
