@@ -84,9 +84,10 @@ table{
 }
 
 #foodName {
+  margin-left: 2%;
   font-size: 1.5em;
   color: orange;
-
+  display: inline;
 }
 
 #mapAndPic {
@@ -98,6 +99,7 @@ table{
   width: 55%;
   display: block;
   margin: 0 auto;
+  /* background: transparent url("../img/turtle_burger.png") no-repeat scroll center center; */
 }
 
 .nutritionTitles {
@@ -155,6 +157,11 @@ table{
   animation: spin 2s linear infinite;
 }
 
+.yelpLoader{
+  display: none;
+}
+
+
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); }
@@ -164,8 +171,6 @@ table{
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
-
 
 #reset {
   background-color: red;
@@ -179,6 +184,7 @@ table{
   background-color: green;
   border-radius: 10px;
   box-shadow: 0 3px #999;
+  margin: 10px 0;
 }
 
 #goThere:hover {

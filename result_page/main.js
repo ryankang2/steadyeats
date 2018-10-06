@@ -32,8 +32,6 @@ function applyClickHandler() {
     $(".tablinks").click(openTab);
     $("#pac-input").hide();
     modalActivity();
-
-
     openTab({
         target: {
             innerHTML: "Nutrition",
@@ -140,6 +138,7 @@ function showMap() {
     $("#pac-input").val(foodInput);
     setTimeout(submitFormData, 1000);
     $(".loader").show();
+    $(".yelpLoader").hide();
 }
 
 /**
@@ -167,14 +166,11 @@ function initAutocomplete() {
             };
             userLocation.lat = position.coords.latitude;
             userLocation.lng = position.coords.longitude;
-            // infoWindow.setPosition(pos);   
-            // infoWindow.setContent("You are Here");
-            // infoWindow.open(map);
             map.setCenter(pos);
             var marker = new google.maps.Marker({
                 position: pos,
                 map: map,
-                icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                icon: "../img/blue-dot.png",
             });
             marker.setMap(map);
             previousInfoWindow = infoWindow;
@@ -215,7 +211,6 @@ function initAutocomplete() {
         markers = [];
 
         let bounds = new google.maps.LatLngBounds();
-        console.log(places);
         places.forEach(function (place) {
             if (!place.geometry) {
                 return;
@@ -249,7 +244,7 @@ function initAutocomplete() {
             $(".list").append(listItem);
 
             markerLocation.addListener("click", function(){
-                $(".list").hide();
+                $(".list").css("display", "none");
                 $(".backToList").css("display", "inline-block");
                 previousInfoWindow.close();
                 infoWindow.open(map, markerLocation);
@@ -285,6 +280,8 @@ function initAutocomplete() {
 
             //add click handlers to each list item that shows on map
             listItem.on("click", function(){
+                $(".yelp").hide();
+                $(".yelpLoader").css("display", "inline-block");
                 $(".list").hide();
                 $(".backToList").css("display", "inline-block");
                 previousInfoWindow.close();

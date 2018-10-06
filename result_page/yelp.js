@@ -25,18 +25,14 @@ function requestYelpData (name, address, city) {
         method: "POST",
         dataType: "json",
         success: function (response) {
-            console.log(response);
             if(response.businesses.length === 0){                
                 $(".yelp").hide();
-                // let noYelpInfo = $("<div>").text("NONE");
-                // $(".yelp").append(noYelpInfo);
                 $(".noYelpInfo").show();
-                
             }
             else{
-                $(".yelp").show();
                 let businessId= response.businesses[0].id;
                 getYelpDetails(businessId);
+                // $(".yelp").show();
             }
             
         },
@@ -80,8 +76,7 @@ function getYelpDetails (id) {
  * @param  {} object response from yelp api
  * Function the displays the data to dom dynamically
  */
-function createYelpDisplay(response) {
-    console.log("yelpresponse: ", response);
+function createYelpDisplay(response){
     let name = response.name;
     $(".name").text(name);
     let phone = response.display_phone;
@@ -90,8 +85,6 @@ function createYelpDisplay(response) {
     let reviewCount = response.review_count;
     let rating = response.rating;
     $(".reviews").text( ` ${price}, ${reviewCount} reviews, ${rating}/5 stars`)
-    // let type = response.categories[0].title;
-    // $(".type").text(type);
     let link = response.url;
     $(".link").text("View on Yelp").attr("href", link).attr("target", "_blank");
     let displayAddress = response.location.address1 + ", " + 
@@ -106,4 +99,7 @@ function createYelpDisplay(response) {
         $(".openOrClosed").text("CLOSED NOW").css("color","red");
     }
     $("#goThere").addClass("scale-in");
+    $(".yelpLoader").hide();
+    $(".yelp").show();
+
 }
