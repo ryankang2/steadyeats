@@ -138,6 +138,7 @@ function showMap() {
     $("#pac-input").val(foodInput);
     setTimeout(submitFormData, 1000);
     $(".loader").show();
+    $(".yelpLoader").hide();
 }
 
 /**
@@ -280,8 +281,8 @@ function initAutocomplete() {
             //add click handlers to each list item that shows on map
             listItem.on("click", function(){
                 $(".yelp").hide();
-                $(".yelpLoader").show();
-                $(".list").css("display", "none");
+                $(".yelpLoader").css("display", "inline-block");
+                $(".list").hide();
                 $(".backToList").css("display", "inline-block");
                 previousInfoWindow.close();
                 infoWindow.open(map, markerLocation);
