@@ -1,30 +1,22 @@
 $(document).ready(initializeApp);
 
-let infoWindow;
-let foodName = sessionStorage.getItem("setFood").toLowerCase();
-let map;
 let previousInfoWindow = false;
 let previousRoute = false;
+let map;
 
 /**
- * apply click handlers and put food name on display
+ * Apply click handlers to elements and display food name
  */
-function initializeApp() {
+function initializeApp(){
+    let foodName = sessionStorage.getItem("setFood").toLowerCase();
     applyClickHandler();
     $("#foodName").text(`You searched for: ${foodName}`);
 }
 
 /**
- * Apply click handler to the button with the if of findMore that runs the startOver function
- * Apply click handler to reset button and logo that runs the startOver function
- * Apply click handler to reset button that runs the startOver function
- * Populate the search bar with the storage variable foodName
- * Hide the search bar with the id of pac-input
- * Apply a click handler to the button with the id of goThere have it display the model on click
- * @param { none };
- * @returns { none };
+ * Apply click handlers to html elements
  */
-function applyClickHandler() {
+function applyClickHandler(){ 
     $("#findMore").click(showMap);
     $(".backToList").click(backToList);
     $(".reset").click(startOver);
@@ -42,7 +34,11 @@ function applyClickHandler() {
 
 }
 
-function openTab(event) {
+/**
+ * Function that handles case when user presses on either Nutrition or Yelp Tab
+ * @param event, the click event that occurs when user presses on nutrition or yelp
+ */
+function openTab(event){
     let i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -88,18 +84,18 @@ function backToList(){
 }
 
 /**
- * shows directions modal when user presses get me there button
+ * shows directions modal when user presses get Directions button
  */
-function modalActivity() {
+function modalActivity(){
     let modal = document.getElementById("directionModal");
-    $("#goThere").click(function () {
+    $("#directions").click(function(){
         $(".modal").show();
     });
-    $(".okBtn").click(function () {
+    $(".okBtn").click(function(){
         $(".modal").hide();
     });
-    window.onclick = function (event) {
-        if (event.target == modal) {
+    window.onclick = function(event){
+        if (event.target == modal){
             $(".modal").hide();
         }
     }
@@ -112,7 +108,7 @@ function modalActivity() {
  * focus on 
  * Trigger the input equivalent to the enter button
  */
-function submitFormData() {
+function submitFormData(){
     let input = document.getElementById("pac-input");
     try {
         google.maps.event.trigger(input, "focus");
@@ -124,12 +120,12 @@ function submitFormData() {
 
 /**
  * Make a function that hides the picture with an id of pic, shows the map
- * with an id of map. Store the session storage variable as a variable called 
- * if user clicks button, hide the picture and show the map
- * fill the search bar with the variabe foodInput
+ * with an id of map. 
+ * fill the search bar with the variable foodInput
  * set a timeout to submit the form data after a short delay 1 second
+ * Hide the spinner
  */
-function showMap() {
+function showMap(){
     $("#findMore").hide();
     $(".list").show();
     $("#pic").hide();
@@ -138,7 +134,6 @@ function showMap() {
     $("#pac-input").val(foodInput);
     setTimeout(submitFormData, 1000);
     $(".loader").show();
-    $(".yelpLoader").hide();
 }
 
 /**
@@ -146,7 +141,7 @@ function showMap() {
  * id of map, cet the center to the origin, zoom to 13, and mapTypeId to roadmap.
  */
 
-function initAutocomplete() {
+function initAutocomplete(){
     let userLocation = {
         lat: 0,
         lng: 0
@@ -156,10 +151,10 @@ function initAutocomplete() {
         mapTypeId: "roadmap"
     });
 
-    infoWindow = new google.maps.InfoWindow;
+    let infoWindow = new google.maps.InfoWindow;
     //this is gives us the current location
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(function(position){
             const pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
@@ -167,14 +162,14 @@ function initAutocomplete() {
             userLocation.lat = position.coords.latitude;
             userLocation.lng = position.coords.longitude;
             map.setCenter(pos);
-            var marker = new google.maps.Marker({
+            let marker = new google.maps.Marker({
                 position: pos,
                 map: map,
                 icon: "../img/blue-dot.png",
             });
             marker.setMap(map);
             previousInfoWindow = infoWindow;
-        }, function () {
+        }, function(){ 
             handleLocationError(true, infoWindow, map.getCenter());
         });
     } 
@@ -197,7 +192,7 @@ function initAutocomplete() {
 
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
-    searchBox.addListener("places_changed", function () {
+    searchBox.addListener("places_changed", function(){
         let places = searchBox.getPlaces();
 
         if (places.length == 0) {
@@ -205,7 +200,7 @@ function initAutocomplete() {
         }
         $(".loader").hide();
         // Clear out the old markers.
-        markers.forEach(function (marker) {
+        markers.forEach(function(marker){
             marker.setMap(null);
         });
         markers = [];
@@ -231,7 +226,6 @@ function initAutocomplete() {
 
             //create a list of restaurants
             let listItem = $("<div>").addClass("listItem");
-            // let orgPic = $("<img>").addClass("orgImg").attr("src", "../img/turtle_pizza.jpeg");
             let generalOrgInfo = $("<div>").addClass("generalOrgInfo");
             let orgName = $("<div>").addClass("orgName").text(place.name);
             let orgAddress = $("<div>").addClass("orgAddress").text("\u2022" + " " + place.formatted_address);
@@ -240,9 +234,9 @@ function initAutocomplete() {
             generalOrgInfo.append(orgAddress);
             generalOrgInfo.append(distance);
             listItem.append(generalOrgInfo);
-            // listItem.append(orgPic);
             $(".list").append(listItem);
 
+            //add click handlers to the markers
             markerLocation.addListener("click", function(){
                 $(".list").css("display", "none");
                 $(".backToList").css("display", "inline-block");
@@ -267,6 +261,7 @@ function initAutocomplete() {
                 })
             });
 
+            //when user hovers over marker location, change color of marker to white
             markerLocation.addListener("mouseover", function(){
                 markerLocation.setIcon("../img/wht-circle.png");
                 listItem.css("background-color", "lightgrey");
@@ -281,7 +276,6 @@ function initAutocomplete() {
             //add click handlers to each list item that shows on map
             listItem.on("click", function(){
                 $(".yelp").hide();
-                $(".yelpLoader").css("display", "inline-block");
                 $(".list").hide();
                 $(".backToList").css("display", "inline-block");
                 previousInfoWindow.close();
@@ -305,6 +299,7 @@ function initAutocomplete() {
                 })
             });
 
+            //add hover handler to listItem that changes marker location to white 
             listItem.hover(function(){
                 markerLocation.setIcon("../img/wht-circle.png");
             }, function(){
@@ -325,11 +320,10 @@ function initAutocomplete() {
 }
 
 /**
- *
+ * Called when not able to look up location, opens up info window
  * @param browserHasGeolocation, passing from initAutocomplete/geolocation
  * @param infoWindow, information that shows on display markers
  * @param pos, position
- * this function is called when not able to find the location
  */
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
@@ -340,10 +334,9 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 /**
- *
- * @param origin
- * @param destination
- * this function display the route on the map
+ * Display the route on the map
+ * @param origin, user's geolocation
+ * @param destination, restaurant location
  */
 function displayRoute(origin, destination) {
     $("#direction").empty();
@@ -366,7 +359,7 @@ function displayRoute(origin, destination) {
                 //here we set previous route to null so it clears the previous route
                 previousRoute.setMap(null);
             }
-            // saved reference of the previous route so we could erase from the map when new destination is clicked
+            //saved reference of the previous route so we could erase from the map when new destination is clicked
             previousRoute = display;
             display.setDirections(response);
         } else {
@@ -376,7 +369,7 @@ function displayRoute(origin, destination) {
 }
 
 /**
- * this function calculates the distance of two points
+ * Calculates the distance between two destinations
  * @param result, distance of two destinations
  */
 function computeTotalDistance(result) {
@@ -392,7 +385,7 @@ function computeTotalDistance(result) {
 
 
 /**
- * callback function. when user presses start over button or logo button, go
+ * callback function. when user presses start logo, go
  * back to first screen
  */
 function startOver() {
@@ -418,13 +411,13 @@ function getDistance(latitudeFrom, longitudeFrom, latitudeTo, longitudeTo){
       Math.cos(deg2rad(latitudeFrom)) * Math.cos(deg2rad(latitudeTo)) * 
       Math.sin(dLon/2) * Math.sin(dLon/2)
       ; 
-    var angle = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    let angle = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
     return (earthRadius * angle).toFixed(2);
 }
 
 /**
  * Helper function for getDistance()
- * @param {*} deg 
+ * @param deg, degree 
  * @return radians of a given degree
  */
 function deg2rad(deg)  {

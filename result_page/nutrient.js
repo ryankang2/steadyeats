@@ -1,7 +1,5 @@
 $(document).ready(initializeApp);
 
-// let food = sessionStorage.getItem("setFood");
-
 /**
  * Once DOM is ready, get nutrition from server and add animations
  * to submit and reset button
@@ -14,10 +12,14 @@ function initializeApp(){
 
 }
 
+/**
+ * Displays picture of food to client and calls to storeNutritionToDOM and displayChart
+ * @param jsonResponse, food item the user searched for
+ */
 function displayFood(jsonResponse){
     let src = jsonResponse.foods[0].photo.highres;
     if(!src){
-        src = "../img/noimage.png";
+        src = "../img/no_image.png";
     }
     let img = $("<img>").attr("src", src);
     $("#pic").append(img);    
@@ -28,7 +30,7 @@ function displayFood(jsonResponse){
 
 /**
  * Updates DOM with nutrition facts
- * @param  {} foodObj the food object retrieved from nutrition api
+ * @param foodObj, the food object retrieved from nutrition api
  */
 function storeNutritionToDOM (foodObj) {
    $(".serving").text(foodObj.serving_qty + " " + foodObj.serving_unit);
@@ -65,6 +67,10 @@ function storeNutritionToDOM (foodObj) {
 
 }
 
+/**
+ * Displays Percent Daily Value bar graph
+ * @param foodObj, food item to show nutrient information for 
+ */
 function displayChart(foodObj){
     let caloriePercent = parseFloat(foodObj.nf_calories/2000).toFixed(2) * 100;
     let cholPercent = parseFloat(foodObj.nf_cholesterol/300).toFixed(2) * 100;
@@ -75,7 +81,7 @@ function displayChart(foodObj){
     let satFatPercent = parseFloat(foodObj.nf_saturated_fat/20).toFixed(2) * 100;
     let chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
-        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        theme: "light2",
         title:{
             text: "Percent Daily Value"
         },
