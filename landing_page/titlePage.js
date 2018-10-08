@@ -1,12 +1,10 @@
 $(document).ready(initializeApp);
 
-let foodInput = null;
 
 /**
- * apply click handlers once document is ready
- * @param {}
+ * Apply click handlers and implement a loader when the user enters a search
  */
-function initializeApp () {
+function initializeApp(){
     addClickHandler();
     //adds spinner when making ajax call
     $(document).ajaxStart(function(){
@@ -18,42 +16,7 @@ function initializeApp () {
 }
 
 /**
- * autofill complete
- */
-$(function() {
-    $('input.autocomplete').autocomplete({
-        // can ajax nutri api for list, but unable too
-      data: {
-        "Apple": null,
-        "Chicken": null,
-        "Taco": null,
-        "Wings": null,
-        "Burritos": null,
-        "Cake": null,
-        "Rice": null,
-        "Pizza": null,
-        "Curry": null,
-        "Orange": null,
-        "Beer": null,
-        "Wine": null,
-        "Burger": null,
-        "Fish": null,
-        "Ice Cream": null,
-        "Strawberry": null,
-        "Cheese": null,
-        "Bread": null,
-        "Chips": null,
-        "Salsa": null,
-        "String cheese": null,
-        "Tofu": null,
-        "Salad": null,
-        "Ramen": null,
-      }
-    });
-});
-
-/**
- * Applies click handler to the submit button
+ * Add click handler to search button
  */
 function addClickHandler () {
     $(".submit").click(submitClicked);
@@ -66,7 +29,7 @@ function addClickHandler () {
 }
 
 /**
- * Once user presses submit, get input and change page
+ * Once user presses submit, retrieve input and change page
  */
 function submitClicked () {
     let returnedFood = retrieveInput();
@@ -78,22 +41,25 @@ function submitClicked () {
 }
 
 /**
- *  Changes the page  
+ *  Changes the page to result page
  */
 function changePage() {
     location.assign("../result_page/food.html")
 }
+
 /**
- * Will use session storage to get user
- * input
+ * Will use session storage to store user input
  */
 function retrieveInput () {
-    foodInput = $("#food").val();
+    let foodInput = $("#food").val();
     sessionStorage.setFood = foodInput;
     return foodInput;
 }
 
-
+/**
+ * Make AJAX call to nutritionIX api with the user input
+ * @param food, user's searched food
+ */
 function nutritionCallFromServer(food){
     let dataForServer = {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -122,3 +88,34 @@ function nutritionCallFromServer(food){
     }
     $.ajax(options);
  }
+
+$(function() {
+    $('input.autocomplete').autocomplete({
+      data: {
+        "Apple": null,
+        "Chicken": null,
+        "Taco": null,
+        "Wings": null,
+        "Burritos": null,
+        "Cake": null,
+        "Rice": null,
+        "Pizza": null,
+        "Curry": null,
+        "Orange": null,
+        "Beer": null,
+        "Wine": null,
+        "Burger": null,
+        "Fish": null,
+        "Ice Cream": null,
+        "Strawberry": null,
+        "Cheese": null,
+        "Bread": null,
+        "Chips": null,
+        "Salsa": null,
+        "String cheese": null,
+        "Tofu": null,
+        "Salad": null,
+        "Ramen": null,
+      }
+    });
+});

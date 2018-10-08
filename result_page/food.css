@@ -24,25 +24,25 @@ table{
   width: 41.333333%;
 }
 
-#right-panel {
+#right-panel{
    font-family: 'Roboto','sans-serif';
    line-height: 30px;
    padding-left: 10px;
 }
 
-#right-panel select, #right-panel input {
+#right-panel select, #right-panel input{
    font-size: 15px;
 }
 
-#right-panel select {
+#right-panel select{
    width: 100%;
 }
 
-#right-panel i {
+#right-panel i{
    font-size: 12px;
 }
 
-#right-panel {
+#right-panel{
    float: right;
    width: 34%;
    height: 100%;
@@ -52,7 +52,7 @@ table{
   position: relative
 }
 
-#logo {
+#logo{
   display: inline-block;
   width: 5%;
 }
@@ -83,14 +83,14 @@ table{
     font-weight: bold;
 }
 
-#foodName {
+#foodName{
   margin-left: 2%;
   font-size: 1.5em;
   color: orange;
   display: inline;
 }
 
-#mapAndPic {
+#mapAndPic{
   width: 100%;
   margin-top: 1%;
 }
@@ -102,16 +102,16 @@ table{
   /* background: transparent url("../img/turtle_burger.png") no-repeat scroll center center; */
 }
 
-.nutritionTitles {
+.nutritionTitles{
   display: inline-block;
   width: 70%
 }
 
-.nutrition {
+.nutrition{
   margin-top: 5%;
 }
 
-.nutritionTitles {
+.nutritionTitles{
   display: inline-block;
   width: 100%;
 }
@@ -121,7 +121,7 @@ table{
   display: none;
 }
 
-#findMore {
+#findMore{
   display: inline-block;
   background-color: rgb(13, 179, 13);
   color: #fff;
@@ -134,11 +134,11 @@ table{
   transform: translateX(-50%);
 }
 
-#findMore:hover {
+#findMore:hover{
   background-color: rgb(62, 197, 29);
 }
 
-#findMore:active, #reset:active, #goThere:active {
+#findMore:active, #reset:active, #directions:active{
   box-shadow: 0 5px #666;
   transform: translateY(3px);
 }
@@ -157,22 +157,17 @@ table{
   animation: spin 2s linear infinite;
 }
 
-.yelpLoader{
-  display: none;
-}
-
-
-@-webkit-keyframes spin {
+@-webkit-keyframes spin{
   0% { -webkit-transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); }
 }
 
-@keyframes spin {  
+@keyframes spin{  
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-#reset {
+#reset{
   background-color: red;
   outline: none;
   border: none;
@@ -180,43 +175,43 @@ table{
   box-shadow: 0 3px #999;
 }
 
-#goThere {
+#directions{
   background-color: green;
   border-radius: 10px;
   box-shadow: 0 3px #999;
   margin: 10px 0;
 }
 
-#goThere:hover {
+#directions:hover{
   background-color: rgb(1, 102, 1);
 }
 
-#reset:hover {
+#reset:hover{
   background-color: rgb(190, 28, 16);
 }
 
-#findMore:hover {
+#findMore:hover{
   background-color: darkgreen;
 }
 
-.nutritionTitles .right-align {
+.nutritionTitles .right-align{
   float: right;
   margin-right: 1%;
 }
 
-.nutrition > div {
+.nutrition > div{
   border: 2px solid black;
 }
 
-.nutrition > div:nth-child(1) {
+.nutrition > div:nth-child(1){
   font-weight: bold;
 }
 
-.nutritionTitles > div {
+.nutritionTitles > div{
   border: 1px solid black;
 }
 
-.yelp {
+.yelp{
   display: none;
   width: 65%;
 }
@@ -232,13 +227,13 @@ table{
 }
 
 
-#yelpImage {
+#yelpImage{
   height:100%;
   width: 100%;
   font-size:0;
 }
 
-.yelp > div {
+.yelp > div{
   border: 2px solid black;
   margin-top: 10%;
 }
@@ -247,24 +242,24 @@ table{
   display: none;
 }
 
-.yelpTitle {
+.yelpTitle{
   font-weight: bold;
   border: 1.2px solid black;
   position: relative;
   bottom:0.75vw;
 }
 
-.yelpTitle, .yelpInfo {
+.yelpTitle, .yelpInfo{
   padding-left: 2%;
   padding-bottom: 3%;
 }
 
-.modal {
+.modal{
   top: 10%;
   z-index: 1;
 }
 
-.adp table {
+.adp table{
   width: 100%;
 }
 
@@ -294,17 +289,17 @@ table{
 }
 
 /* Change background color of buttons on hover */
-.tab button:hover {
+.tab button:hover{
   background-color: #ddd;
 }
 
 /* Create an active/current tablink class */
-.tab button.active {
+.tab button.active{
   background-color: #ccc;
 }
 
 /* Style the tab content */
-.tabcontent {
+.tabcontent{
   display: none;
   border-top: none;
 }
@@ -337,12 +332,6 @@ table{
   cursor: pointer;
 }
 
-/* .orgImg{
-  border: 1px solid blue;
-  width: 21%;
-} */
-
-
 .orgName{
   font-size: 14px;
   font-weight: bold;
@@ -362,7 +351,12 @@ table{
   cursor: pointer;
 }
 
-@media only screen and (max-width: 1024px) {
+#chartContainer{
+  height: 300px;
+  width: 100%;
+}
+
+@media only screen and (max-width: 1024px){
   .row .col.offset-s1{
     margin-left: -0.666667%;
     width: 100%;
