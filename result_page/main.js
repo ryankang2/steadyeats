@@ -238,6 +238,7 @@ function initAutocomplete(){
 
             //add click handlers to the markers
             markerLocation.addListener("click", function(){
+                $(".noYelpInfo").hide();
                 $(".list").css("display", "none");
                 $(".backToList").css("display", "inline-block");
                 previousInfoWindow.close();
