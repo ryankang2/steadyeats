@@ -229,7 +229,8 @@ function initAutocomplete(){
             let generalOrgInfo = $("<div>").addClass("generalOrgInfo");
             let orgName = $("<div>").addClass("orgName").text(place.name);
             let orgAddress = $("<div>").addClass("orgAddress").text("\u2022" + " " + place.formatted_address);
-            let distance = $("<div>").addClass("distance").text("\u2022" + " " + getDistance(userLocation.lat, userLocation.lng, place.geometry.viewport.f.b, place.geometry.viewport.b.b) + " miles");
+            console.log(place.geometry);
+            let distance = $("<div>").addClass("distance").text("\u2022" + " " + getDistance(userLocation.lat, userLocation.lng, place.geometry.viewport.l.j, place.geometry.viewport.j.j) + " miles");
             generalOrgInfo.append(orgName);
             generalOrgInfo.append(orgAddress);
             generalOrgInfo.append(distance);
